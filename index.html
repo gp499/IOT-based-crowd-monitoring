@@ -20,19 +20,41 @@
       
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByDs63-_VUrj626Y3-0byR8sr6apuDby8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>
+   <script>
       var map;
-    
-              function initialize() {
+        var x;
+        function loadmaps(){
+            $.getJSON("https://api.thingspeak.com/channels/736011/fields/1/last.json?api_key=Z9K0P8OMYECIU376", function(result){
+          
+            var m = result;
+            x=Number(m.field1);
+                           //alert(x);
+        });
+            $.getJSON("https://api.thingspeak.com/channels/736011/fields/2/last.json?api_key=Z9K0P8OMYECIU376", function(result){
+          
+            var m = result;
+            y=Number(m.field2);
+                
+                
+        }).done(function() {
+            
+                initialize();
+    });
+            
+        }
+        window.setInterval(function(){
+        loadmaps();
+            }, 9000);
+      function initialize() {
           //alert(y);
         var mapOptions = {
           zoom: 18,
-          center: {lat:  19.0692925, lng: 72.89334989999999}
+          center: {lat: x, lng: y}
         };
         map = new google.maps.Map(document.getElementById('map'),
             mapOptions);
         var marker = new google.maps.Marker({
-          position: {lat: 19.0692925, lng: 72.89334989999999},
+          position: {lat: x, lng: y},
           map: map
         });
         var infowindow = new google.maps.InfoWindow({
@@ -59,14 +81,14 @@ function loadXMLDoc() {
       xhttp.responseText;
     }
   };
-  xhttp.open("GET", "https://api.thingspeak.com/channels/736011/feeds.json?results=4", true);
+  xhttp.open("GET", "https://api.thingspeak.com/channels/736011/feeds.json?results=5", true);
   xhttp.send();
 }
 </script>
 <div align="center">
 <iframe width="500" height="250" position="center" style="border: 1px solid #cccccc;" 
 
-src="https://thingspeak.com/channels/736011/charts/4" ></iframe>
+src="https://thingspeak.com/channels/736011/charts/5" ></iframe>
     </div>
 <div id="map">
     </div>
