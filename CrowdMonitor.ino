@@ -5,12 +5,6 @@
 #define BLYNK_PRINT Serial
 #include <BlynkSimpleEsp8266.h>
 
-/*
-   This sample sketch demonstrates the normal use of a TinyGPS++ (TinyGPSPlus) object.
-   It requires the use of SoftwareSerial, and assumes that you have a
-   4800-baud serial GPS device hooked up on pins 4(rx) and 3(tx).
-*/
-
 static const int RXPin = 4, TXPin = 5;
 static const uint32_t GPSBaud = 9600;
 
@@ -19,9 +13,9 @@ const char* ssid     = "Redmi";
 const char* password = "12345678";
 
 
-char auth[] = "1b371917a55947d0b853758e27cd0002";
-unsigned long myChannelNumber = 736011;
-const char * myWriteAPIKey = "3U8KPQGVODVTS309";
+char auth[] = "XXXXX";
+unsigned long myChannelNumber = XXXX;
+const char * myWriteAPIKey = "XXXXXX";
 
 const byte interruptPin1 = D5;
 const byte interruptPin2 = D6;
@@ -51,11 +45,7 @@ void setup()
   ss.begin(GPSBaud);
   
   Blynk.begin(auth,ssid,password);
-  Serial.println(F("DeviceExample.ino"));
-  Serial.println(F("A simple demonstration of TinyGPS++ with an attached GPS module"));
-  Serial.print(F("Testing TinyGPS++ library v. ")); Serial.println(TinyGPSPlus::libraryVersion());
-  Serial.println();
-
+  
   Serial.print("Connecting to ");
   Serial.println(ssid);
   WiFi.begin(ssid, password);
